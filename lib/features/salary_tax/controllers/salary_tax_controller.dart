@@ -5,27 +5,36 @@ import '../services/salary_tax_service.dart';
 class SalaryTaxController extends ChangeNotifier {
   final TextEditingController salaryController = TextEditingController();
 
-  SalaryTaxModel? result;
-  bool hasCalculated = false;
+  // Always show results — starts at zero
+  SalaryTaxModel result = SalaryTaxService.calculate(0);
 
-  void calculate() {
+  SalaryTaxController() {
+    salaryController.addListener(_onSalaryChanged);
+    // Seed with zero state
+    result = SalaryTaxService.calculate(0);
+  }
+
+  void _onSalaryChanged() {
     final double salary =
         double.tryParse(salaryController.text.replaceAll(',', '')) ?? 0;
-    if (salary <= 0) return;
-    result = SalaryTaxService.calculate(salary);
-    hasCalculated = true;
+    result = SalaryTaxService.calculate(salary.clamp(0, double.infinity));
     notifyListeners();
   }
 
+  double get currentSalary =>
+      double.tryParse(salaryController.text.replaceAll(',', '')) ?? 0;
+
+  bool get hasInput => currentSalary > 0;
+
   void reset() {
     salaryController.clear();
-    result = null;
-    hasCalculated = false;
+    result = SalaryTaxService.calculate(0);
     notifyListeners();
   }
 
   @override
   void dispose() {
+    salaryController.removeListener(_onSalaryChanged);
     salaryController.dispose();
     super.dispose();
   }
