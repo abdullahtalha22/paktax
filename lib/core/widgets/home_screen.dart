@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final topPad = MediaQuery.of(context).padding.top;
     final bottomPad = MediaQuery.of(context).padding.bottom;
-    // Responsive scale factor — 1.0 on a 844px tall phone (iPhone 12)
     final sf = (size.height / 844).clamp(0.80, 1.15);
 
     return Scaffold(
@@ -50,7 +49,6 @@ class HomeScreen extends StatelessWidget {
                           .fadeIn(duration: 400.ms, delay: 200.ms)
                           .slideY(begin: 0.08, end: 0, curve: Curves.easeOutCubic),
                       SizedBox(height: 18 * sf),
-                      // Section header
                       Row(
                         children: [
                           Text(
@@ -86,7 +84,6 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ).animate().fadeIn(duration: 350.ms, delay: 280.ms),
                       SizedBox(height: 12 * sf),
-                      // Salary Tax — large
                       _FeatureCardLarge(
                         title: 'Salary Tax',
                         subtitle: 'Income tax on monthly gross salary',
@@ -100,13 +97,12 @@ class HomeScreen extends StatelessWidget {
                         sf: sf,
                       ),
                       SizedBox(height: 11 * sf),
-                      // Withholding + PTA — side by side
                       Expanded(
                         child: Row(
                           children: [
                             Expanded(
                               child: _FeatureCardSmall(
-                                title: 'Withholding\nTax',
+                                title: 'Withholding Tax',
                                 tag: 'Sec 153',
                                 icon: Icons.percent_rounded,
                                 gradient: const [Color(0xFFFF6B35), Color(0xFFE5501A)],
@@ -119,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(width: 11 * sf),
                             Expanded(
                               child: _FeatureCardSmall(
-                                title: 'PTA Device\nTax',
+                                title: 'PTA Device Tax',
                                 tag: 'DIRBS',
                                 icon: Icons.phone_android_rounded,
                                 gradient: const [Color(0xFFB06EFF), Color(0xFF8B3FE8)],
@@ -133,7 +129,6 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 11 * sf),
-                      // Remittance — large compact
                       _FeatureCardLarge(
                         title: 'Remittance Tax',
                         subtitle: 'Foreign transfers — Sec 236AA / 236Y',
@@ -309,7 +304,6 @@ class _HeroSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top bar
                 Row(
                   children: [
                     Container(
@@ -358,12 +352,12 @@ class _HeroSection extends StatelessWidget {
                         fontSize: 12, fontWeight: FontWeight.w600,
                         color: Colors.white.withOpacity(0.60), letterSpacing: 0.4)),
                 SizedBox(height: 6 * sf),
-                Text('Smart Tax\nCalculator',
+                Text('Smart Tax Calculator',
                     style: GoogleFonts.sora(
                         fontSize: 30 * sf, fontWeight: FontWeight.w800,
                         color: Colors.white, height: 1.1, letterSpacing: -1.3)),
                 SizedBox(height: 9 * sf),
-                Text('Accurate FBR calculations for Tax Year 2025-26.',
+                Text('Accurate FBR calculations for Tax\nYear 2025-26.',
                     style: GoogleFonts.sora(
                         fontSize: 12, height: 1.55,
                         color: Colors.white.withOpacity(0.68))),
@@ -403,10 +397,7 @@ class _StatsBanner extends StatelessWidget {
               Colors.white.withOpacity(0.82),
             ]),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: isDark ? Colors.white.withOpacity(0.10) : Colors.white.withOpacity(0.95),
-              width: 1,
-            ),
+            // ── FIXED: removed prominent white border, use subtle shadow only ──
             boxShadow: [
               BoxShadow(
                 color: isDark ? Colors.black.withOpacity(0.28) : Colors.black.withOpacity(0.06),
@@ -524,21 +515,20 @@ class _FeatureCardLargeState extends State<_FeatureCardLarge> with SingleTickerP
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: widget.gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
             borderRadius: BorderRadius.circular(22),
-            boxShadow: [BoxShadow(color: widget.gradient.first.withOpacity(0.42), blurRadius: 24, offset: const Offset(0, 9))],
+            // ── FIXED: removed border, kept only shadow ──
+            boxShadow: [BoxShadow(color: widget.gradient.first.withOpacity(0.38), blurRadius: 20, offset: const Offset(0, 8))],
           ),
           child: Stack(
             children: [
+              // Decorative circle — top right
               Positioned(right: -18, top: -18,
                   child: Container(width: 110, height: 110,
                       decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.08)))),
+              // Decorative circle — bottom right
               Positioned(right: 26, bottom: -22,
                   child: Container(width: 72, height: 72,
                       decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.06)))),
-              Positioned(top: 0, left: 0, right: 0,
-                  child: Container(height: 2,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [Colors.white.withOpacity(0.40), Colors.transparent]),
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(22), topRight: Radius.circular(22))))),
+              // ── REMOVED: top highlight strip that caused the visible edge line ──
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                 child: Row(
@@ -546,9 +536,10 @@ class _FeatureCardLargeState extends State<_FeatureCardLarge> with SingleTickerP
                     Container(
                       width: 50, height: 50,
                       decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.20),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.white.withOpacity(0.30), width: 1)),
+                        color: Colors.white.withOpacity(0.20),
+                        borderRadius: BorderRadius.circular(15),
+                        // ── FIXED: removed icon container border ──
+                      ),
                       child: Icon(widget.icon, color: Colors.white, size: 22),
                     ),
                     const SizedBox(width: 14),
@@ -578,9 +569,10 @@ class _FeatureCardLargeState extends State<_FeatureCardLarge> with SingleTickerP
                         Container(
                           width: 34, height: 34,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.22),
-                              borderRadius: BorderRadius.circular(11),
-                              border: Border.all(color: Colors.white.withOpacity(0.35), width: 1)),
+                            color: Colors.white.withOpacity(0.22),
+                            borderRadius: BorderRadius.circular(11),
+                            // ── FIXED: removed arrow button border ──
+                          ),
                           child: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 17),
                         ),
                         const SizedBox(height: 7),
@@ -650,18 +642,16 @@ class _FeatureCardSmallState extends State<_FeatureCardSmall> with SingleTickerP
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: widget.gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
             borderRadius: BorderRadius.circular(22),
-            boxShadow: [BoxShadow(color: widget.gradient.first.withOpacity(0.42), blurRadius: 20, offset: const Offset(0, 8))],
+            // ── FIXED: removed border, kept only shadow ──
+            boxShadow: [BoxShadow(color: widget.gradient.first.withOpacity(0.38), blurRadius: 18, offset: const Offset(0, 7))],
           ),
           child: Stack(
             children: [
+              // Decorative circle — top right
               Positioned(right: -12, top: -12,
                   child: Container(width: 80, height: 80,
                       decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.08)))),
-              Positioned(top: 0, left: 0, right: 0,
-                  child: Container(height: 2,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [Colors.white.withOpacity(0.40), Colors.transparent]),
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(22), topRight: Radius.circular(22))))),
+              // ── REMOVED: top highlight strip that caused the visible edge line ──
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -673,9 +663,10 @@ class _FeatureCardSmallState extends State<_FeatureCardSmall> with SingleTickerP
                         Container(
                           width: 44, height: 44,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.20),
-                              borderRadius: BorderRadius.circular(13),
-                              border: Border.all(color: Colors.white.withOpacity(0.30), width: 1)),
+                            color: Colors.white.withOpacity(0.20),
+                            borderRadius: BorderRadius.circular(13),
+                            // ── FIXED: removed icon container border ──
+                          ),
                           child: Icon(widget.icon, color: Colors.white, size: 20),
                         ),
                         Container(
