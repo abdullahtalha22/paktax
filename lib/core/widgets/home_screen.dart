@@ -409,9 +409,9 @@ class _StatsBanner extends StatelessWidget {
             children: [
               _StatItem(value: '4', label: 'Calculators', color: AppColors.salaryBlue, icon: Icons.calculate_rounded, isDark: isDark, sf: sf),
               _StatDivider(isDark: isDark),
-              _StatItem(value: '0%', label: 'Up to 600K', color: AppColors.accentGreen, icon: Icons.shield_rounded, isDark: isDark, sf: sf),
+              _StatItem(value: 'FBR', label: 'Verified Data', color: AppColors.accentGreen, icon: Icons.verified_rounded, isDark: isDark, sf: sf),
               _StatDivider(isDark: isDark),
-              _StatItem(value: '35%', label: 'Max Rate', color: AppColors.whtOrange, icon: Icons.trending_up_rounded, isDark: isDark, sf: sf),
+              _StatItem(value: '\'26', label: 'Tax Year', color: AppColors.whtOrange, icon: Icons.calendar_today_rounded, isDark: isDark, sf: sf),
             ],
           ),
         ),
