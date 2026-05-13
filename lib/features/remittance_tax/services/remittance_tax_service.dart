@@ -1,39 +1,5 @@
 import '../models/remittance_tax_model.dart';
 
-/// FBR Remittance Tax — Tax Year 2025-26 (1 July 2025 – 30 June 2026)
-///
-/// ─────────────────────────────────────────────────────────────────────────────
-/// Section 236AA — Advance tax on INWARD remittances received through
-///   authorised banking channels and Exchange Companies.
-///   Collected by the bank / exchange company at time of receipt.
-///   Rate: 1% (Filer / ATL)  |  2% (Non-Filer / non-ATL)
-///   Nature: Adjustable — can be set off against annual income tax liability.
-///
-///   IMPORTANT — Section 111(4) Exemption:
-///   Personal / family / genuine remittances received through official banking
-///   channels are EXEMPT from income tax under Section 111(4) of the ITO 2001.
-///   • Up to USD ~$100,000 equivalent (approx. PKR 28M+) per tax year: FBR
-///     cannot ask for source of funds — fully exempt.
-///   • The 236AA withholding (1% or 2%) is still deducted by the bank at the
-///     time of receipt. However, since it is ADJUSTABLE, the recipient can
-///     claim a full refund by filing an income tax return and citing the
-///     Section 111(4) exemption.
-///   → In practice: bank WILL deduct the tax upfront; file your return
-///     to get it back. Commercial / business remittances are not exempt.
-///
-/// Section 236Y — Advance tax on OUTWARD remittances made through
-///   debit cards, credit cards, or prepaid cards.
-///   Collected by the bank / card-issuer at time of transaction.
-///   Rate: 1% (Filer / ATL)  |  2% (Non-Filer / non-ATL)
-///   History: Finance Act 2023 raised non-filer rate to 10%;
-///            Finance Act 2025 reduced it back to 2% (effective 1 July 2025).
-///   Nature: Adjustable — can be set off against annual income tax liability.
-/// ─────────────────────────────────────────────────────────────────────────────
-///
-/// Sources:
-///   • Waystax.com — Withholding Tax Rates Pakistan 2025-26 (updated Apr 2026)
-///   • FBR Circular No. 01 of 2025-26 Income Tax (2 August 2025)
-///   • KPMG Taseer Hadi — A Brief on Finance Act 2025 (July 2025)
 /// ─────────────────────────────────────────────────────────────────────────────
 class RemittanceTaxService {
   // ── Channel Keys ──────────────────────────────────────────────────────────
