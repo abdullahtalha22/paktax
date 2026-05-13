@@ -1,30 +1,5 @@
 import '../models/pta_tax_model.dart';
 
-/// PTA Device Tax Service
-/// Sources:
-///   • FBR Finance Act 2025
-///   • Valuation Ruling 1999/2025
-///   • Valuation Ruling 2035/2026 (Jan 16, 2026 — used/refurb phones)
-///   • Valuation Ruling 2070/2026 (Apr 2026 — revised upward)
-///   • Valuation Ruling 2076/2026
-///
-/// TAX FORMULA:
-///   Total = Customs Duty (base slab) + Regulatory Duty + Sales Tax (17%) + WHT (1%)
-///
-/// FBR BASE SLABS — fixed PKR by phone USD customs value:
-///   < $30          → Rs 430
-///   $30–$100       → Rs 2,500 (Passport) / Rs 3,000 (CNIC)
-///   $100–$200      → Rs 8,000 (Passport) / Rs 11,561 (CNIC)
-///   $200–$350      → Rs 12,000 (Passport) / Rs 14,661 (CNIC)
-///   $350–$500      → Rs 17,800 (Passport) / Rs 23,420 (CNIC)
-///   > $500         → Rs 27,600 (Passport) / Rs 37,007 (CNIC)
-///   + 17% Sales Tax ad valorem on PKR customs value
-///   + 1%  WHT (filer rate)
-///   Laptops        → 0% customs duty (only 17% ST + 1% WHT)
-///
-/// KEY INSIGHT: FBR valuations update frequently.
-/// For unlisted devices, use [calculateByUsdValue] with the
-/// device's current FBR customs value from dirbs.pta.gov.pk
 
 class PtaTaxService {
   static const double usdToPkr = 280.0;
